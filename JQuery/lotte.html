@@ -1,0 +1,105 @@
+  <!-- 경품 추천기 -->
+<html>
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <title>경품 추천기</title>
+        <style>
+            body{
+                font-size: 9pt;
+            }
+            #panel1{
+                border : 1px #000000 solid;
+                line-height: 400px;
+                font-size: 100px;
+                width: 400px;
+                height: 400px;
+                text-align: center;
+                vertical-align: middle;
+            }
+        </style>
+        <script>
+            var panel1;
+            var nTimerID;
+            var labTotal;
+            var nTotalMember;
+
+            window.onload = function(){
+                this.init();
+                this.initEventListener();
+            }
+
+            function createNumber(){
+                var nNum = 1+ Math.floor(Math.random()*this.nTotalMember);
+                this.panel1.innerHTML =nNum;
+                this.panel1.style.fontSize = 100 + (Math.random()*100) + "px";
+            }
+
+            function startTimer(){
+              if(this.nTimerID===0){
+                  this.nTotalMember = Number(this.labTotal.value);
+                  this.resetPanelStyle();
+                  this.nTimerID = setInterval(this.createNumber,20);
+              }
+            }
+
+            function stopTimer(){
+                if(this.nTimerID){
+                    clearInterval(this.nTimerID);
+                    this.nTimerID = 0;
+
+                    this.showWinner();
+                   
+                }
+            }
+
+            function showWinner(){
+                this.panel1.panel1.style.color ="#ff0000";
+                this.panel1. panel1.style.fontSize = "250px";
+            }
+
+            function resetPanelStyle(){
+                this.panel1.style.color = "#000000";
+            }
+
+            function init(){
+                this.panel1 = document.getElementById("pannel1");
+                //숫자가 출력된 #panel1을 찾아 지역변수에 담아둠
+                this.nTimerID =0;
+
+                this.labTotal = document.getElementById("lab_total");
+                this.nTotalMember = 0;
+            }
+
+            //이벤트 초기화
+            function initEventListener(){
+                var btnStart = document.getElementById("btn_start");
+                btnStart.addEventListener("click",function(){
+                    startTimer();
+                },false);
+
+                var btnStop = document.getElementById("btn_stop");
+                btnStop.addEventListener("click",function(){
+                    stopTimer();
+                },false);
+            }
+
+           
+        </script>
+  </head>
+  <body>
+    <div>
+        <h4>경품 추천기</h4>
+        <div id="panel1">1
+            <!-- 이곳에 숫자 출력 -->
+        </div>
+        <div id="nav">
+            참여인원 : <input type="text" id="lab_total" value="100"></input>
+            <button id="btn_start">시작</button>
+            <button id="btn_stop">멈춤</button>
+        
+        </div>
+    </div>
+  </body>
+
+   
+</html>
